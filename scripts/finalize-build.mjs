@@ -14,7 +14,7 @@ for (const name of readdirSync(path.join(root, 'assets')).filter(name => name.en
   writeFileSync(file, source);
 }
 const urls = new Set(['index.html', 'credits.html', 'manifest.webmanifest', 'icons/icon-192.png', 'icons/icon-512.png', 'icons/icon-512-maskable.png']);
-for (const name of ['style.css', 'favicon.png']) if (existsSync(path.join(root, name))) urls.add(name);
+for (const name of ['style.css', 'favicon.png', 'assets/title/title-hero.png']) if (existsSync(path.join(root, name))) urls.add(name);
 function collect(value) {
   if (typeof value === 'string' && !/^(https?:|data:)/.test(value) && existsSync(path.join(root, value.split('?')[0]))) urls.add(value);
   else if (Array.isArray(value)) value.forEach(collect);
