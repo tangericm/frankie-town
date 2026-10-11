@@ -23,7 +23,7 @@ function collect(value) {
 for (const [url, version] of versions) { urls.add(`${url}?h=${version}`); collect(JSON.parse(readFileSync(path.join(root, url), 'utf8'))); }
 for (const name of readdirSync(path.join(root, 'assets'))) if (/\.(js|css)$/.test(name)) urls.add(`assets/${name}`);
 for (const dir of ['assets/fonts', 'assets/audio/music', 'assets/audio/sfx']) {
-  if (existsSync(path.join(root, dir))) for (const name of readdirSync(path.join(root, dir))) if (/\.(woff2?|ogg|m4a)$/.test(name)) urls.add(`${dir}/${name}`);
+  if (existsSync(path.join(root, dir))) for (const name of readdirSync(path.join(root, dir))) if (/\.(woff2?|ogg|m4a)$|(?:^|-)OFL\.txt$/.test(name)) urls.add(`${dir}/${name}`);
 }
 const list = [...urls].sort();
 const revision = hash(list.map(url => `${url}:${hash(readFileSync(path.join(root, url.split('?')[0])))}`).join('\n'));
