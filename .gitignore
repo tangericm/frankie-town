@@ -1,0 +1,17 @@
+node_modules/
+dist/
+.env
+.env.*
+*.log
+.DS_Store
+.vercel/
+.qa-out/
+# Game assets and personal creation inputs stay private.
+public/assets/
+public/icons/
+public/favicon.png
+art/
+art-source/
+art-archive/
+build/
+*.scene

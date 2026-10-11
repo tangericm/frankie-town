@@ -1,0 +1,38 @@
+{
+  "name": "frankie-town",
+  "description": "A cozy pixel-art dog adventure with neighborhood puzzles, browser saves, and offline play.",
+  "version": "1.2.1",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tangericm/frankie-town.git"
+  },
+  "license": "MIT",
+  "licenseUrl": "http://www.opensource.org/licenses/mit-license.php",
+  "scripts": {
+    "start": "vite --config vite/config.dev.mjs",
+    "typecheck": "tsc --noEmit",
+    "preview": "vite preview --config vite/config.prod.mjs --port 8081",
+    "test": "node scripts/tests/game-state.test.mjs && node scripts/tests/dialogue-sequencer.test.mjs && node scripts/tests/dialogue-box.test.mjs && node scripts/tests/interaction-nearest.test.mjs && node scripts/tests/npc-collider.test.mjs && node scripts/tests/market-rules.test.mjs && node scripts/tests/market-integration.test.mjs && node scripts/tests/market-pickups.test.mjs && node scripts/tests/quest-handoff.test.mjs && node scripts/tests/mobile-ui.test.mjs && node scripts/tests/player-facing-text.test.mjs && node scripts/tests/palette-contrast.test.mjs && node scripts/tests/objectives.test.mjs && node scripts/tests/timing-bar.test.mjs && node scripts/tests/juice.test.mjs && node scripts/tests/prop-thoughts.test.mjs && node scripts/tests/pathfinding.test.mjs && node scripts/tests/camera-fit.test.mjs && node scripts/tests/playtest-regressions.test.mjs && node scripts/tests/dinner.test.mjs && node scripts/tests/audit-regressions.test.mjs && node scripts/tests/private-assets.test.mjs",
+    "build:code": "vite build --config vite/config.prod.mjs",
+    "build": "node scripts/check-private-assets.mjs && vite build --config vite/config.prod.mjs && phaser-asset-pack-hashing -r dist && node scripts/finalize-build.mjs",
+    "verify": "npm run typecheck && npm test && npm run build:code",
+    "test:production": "node scripts/tests/production-cache.test.mjs"
+  },
+  "devDependencies": {
+    "phaser-asset-pack-hashing": "^1.0.6",
+    "playwright": "^1.62.1",
+    "terser": "^5.28.1",
+    "typescript": "^5.3.3",
+    "vite": "^7.3.1"
+  },
+  "dependencies": {
+    "@phaserjs/editor-scripts-base": "^2.0.1",
+    "phaser": "^4.1.0"
+  },
+  "private": true,
+  "author": "Eric M. Tang",
+  "homepage": "https://frankie-town.vercel.app",
+  "engines": {
+    "node": ">=22.12.0"
+  }
+}
