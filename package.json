@@ -12,11 +12,12 @@
     "start": "vite --config vite/config.dev.mjs",
     "typecheck": "tsc --noEmit",
     "preview": "vite preview --config vite/config.prod.mjs --port 8081",
-    "test": "node scripts/tests/game-state.test.mjs && node scripts/tests/dialogue-sequencer.test.mjs && node scripts/tests/dialogue-box.test.mjs && node scripts/tests/interaction-nearest.test.mjs && node scripts/tests/npc-collider.test.mjs && node scripts/tests/market-rules.test.mjs && node scripts/tests/market-integration.test.mjs && node scripts/tests/market-pickups.test.mjs && node scripts/tests/quest-handoff.test.mjs && node scripts/tests/mobile-ui.test.mjs && node scripts/tests/player-facing-text.test.mjs && node scripts/tests/palette-contrast.test.mjs && node scripts/tests/objectives.test.mjs && node scripts/tests/timing-bar.test.mjs && node scripts/tests/juice.test.mjs && node scripts/tests/prop-thoughts.test.mjs && node scripts/tests/pathfinding.test.mjs && node scripts/tests/camera-fit.test.mjs && node scripts/tests/playtest-regressions.test.mjs && node scripts/tests/dinner.test.mjs && node scripts/tests/audit-regressions.test.mjs && node scripts/tests/private-assets.test.mjs",
+    "test": "node scripts/tests/game-state.test.mjs && node scripts/tests/dialogue-sequencer.test.mjs && node scripts/tests/dialogue-box.test.mjs && node scripts/tests/interaction-nearest.test.mjs && node scripts/tests/npc-collider.test.mjs && node scripts/tests/market-rules.test.mjs && node scripts/tests/market-integration.test.mjs && node scripts/tests/market-pickups.test.mjs && node scripts/tests/quest-handoff.test.mjs && node scripts/tests/mobile-ui.test.mjs && node scripts/tests/player-facing-text.test.mjs && node scripts/tests/palette-contrast.test.mjs && node scripts/tests/objectives.test.mjs && node scripts/tests/timing-bar.test.mjs && node scripts/tests/juice.test.mjs && node scripts/tests/prop-thoughts.test.mjs && node scripts/tests/pathfinding.test.mjs && node scripts/tests/camera-fit.test.mjs && node scripts/tests/playtest-regressions.test.mjs && node scripts/tests/dinner.test.mjs && node scripts/tests/audit-regressions.test.mjs && node scripts/tests/private-assets.test.mjs && npm run test:distribution",
     "build:code": "vite build --config vite/config.prod.mjs",
     "build": "node scripts/check-private-assets.mjs && vite build --config vite/config.prod.mjs && phaser-asset-pack-hashing -r dist && node scripts/finalize-build.mjs",
     "verify": "npm run typecheck && npm test && npm run build:code",
-    "test:production": "node scripts/tests/production-cache.test.mjs"
+    "test:production": "node scripts/tests/production-cache.test.mjs",
+    "test:distribution": "node scripts/tests/runtime-distribution.test.mjs"
   },
   "devDependencies": {
     "phaser-asset-pack-hashing": "^1.0.6",

@@ -1,8 +1,9 @@
 // Finish portable pack URLs, then precache exactly the runtime resources (not source art).
-import { readFileSync, writeFileSync, readdirSync, existsSync } from 'node:fs';
+import { readFileSync, writeFileSync, readdirSync, existsSync, rmSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import path from 'node:path';
 const root = path.resolve(process.argv[2] ?? 'dist');
+if (!existsSync(path.join(root, 'index.html')) || !existsSync(path.join(root, 'sw.js'))) throw new Error('Expected a built game distribution.');
 const hash = bytes => createHash('sha256').update(bytes).digest('hex').slice(0, 16);
 const packs = readdirSync(path.join(root, 'assets')).filter(name => name.endsWith('asset-pack.json'));
 const versions = packs.map(name => [`assets/${name}`, hash(readFileSync(path.join(root, 'assets', name)))]);
@@ -28,4 +29,10 @@ const list = [...urls].sort();
 const revision = hash(list.map(url => `${url}:${hash(readFileSync(path.join(root, url.split('?')[0])))}`).join('\n'));
 const worker = path.join(root, 'sw.js');
 writeFileSync(worker, readFileSync(worker, 'utf8').replace('__BUILD_CACHE__', `frankie-${revision}`).replace('const SHELL = [];', `const SHELL = ${JSON.stringify(list)};`));
+// Vite copies the entire public directory; publish only files used by the runtime.
+const published = new Set([...list.map(url => url.split('?')[0]), 'sw.js']);
+for (const entry of readdirSync(root, { recursive: true, withFileTypes: true })) {
+  const file = path.join(entry.parentPath, entry.name);
+  if (entry.isFile() && !published.has(path.relative(root, file).split(path.sep).join('/'))) rmSync(file);
+}
 console.log(`Versioned ${packs.length} packs; precached ${list.length} runtime resources (${revision}).`);

@@ -33,7 +33,7 @@ npm run build
 npm run preview
 ```
 
-Development uses port 8080; preview uses 8081. Serve the whole production `dist/` directory. The production build hashes pack references and generates a content-derived offline cache. After a full asset-backed build, optional browser checks cover first-session offline reopening and retained-profile updates at root and subdirectory paths:
+Development uses port 8080; preview uses 8081. Serve the whole production `dist/` directory. The production build hashes pack references, generates a content-derived offline cache and removes files outside that runtime list, including generation metadata, references and scene source. After a full asset-backed build, optional browser checks cover first-session offline reopening and retained-profile updates at root and subdirectory paths:
 
 ```sh
 npx playwright install chromium

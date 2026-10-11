@@ -1,6 +1,9 @@
 import Phaser from "phaser";
 
-/** Bitmap text keeps small speaker names and UI labels crisp; body text uses Nunito. */
+/**
+ * Bitmap text keeps speaker names, settings and journal labels crisp at small sizes.
+ * Use integer scaling to avoid ambiguous glyphs. Dialogue body text uses Nunito.
+ */
 export const PIXEL_FONT_KEY = "pixel-font";
 
 export interface PixelTextOptions {
